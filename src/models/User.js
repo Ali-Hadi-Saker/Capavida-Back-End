@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
         required: function() { return this.role == "intern";}
     },
     disabilityTypes: {
-        type: String, 
+        type: [String], 
         required: function() { return this.role == "intern";},
         enum: validDisabilities
     },

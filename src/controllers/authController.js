@@ -16,7 +16,7 @@ export const registerUser = async (req, res)=> {
             return res.status(400).json({message: "Invalid member code!"});
         }
 
-                // Enforce disability selection rules for interns
+        // Enforce disability selection rules for interns
         if (role === "intern") {
             const validDisabilities = [
                 "Autism", "ADHD", "Blind", "Down Syndrome", "Dyslexia", "Mute", 
@@ -29,7 +29,7 @@ export const registerUser = async (req, res)=> {
             }
         }
 
-        const newUser = new User({name, email, password: hashedPassword, disabilityCardCode, disabilityType, memberCode, phone, role});
+        const newUser = new User({name, email, password: hashedPassword, disabilityCardCode, disabilityTypes, memberCode, phone, role});
         await newUser.save();
 
         res.status(201).json({message: "User registerd successfully"});
