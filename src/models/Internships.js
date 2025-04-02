@@ -9,7 +9,7 @@ const internshipSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    poviderId: {
+    providerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true

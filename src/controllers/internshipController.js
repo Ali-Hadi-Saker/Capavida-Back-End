@@ -36,7 +36,7 @@ export const getInternshipById = async (req, res) => {
     }
 }
 
-export const deleteInternship = async ()=> {
+export const deleteInternship = async (req, res)=> {
     try {
         const internship = Internship.findById(req.params.id);
         if(!internship) return res.status(404).json({error: "Internship not found"});

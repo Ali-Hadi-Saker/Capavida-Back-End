@@ -19,6 +19,6 @@ connectDB();
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("api/internship", internshipRoutes)
+app.use("/api/internship", internshipRoutes)
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
