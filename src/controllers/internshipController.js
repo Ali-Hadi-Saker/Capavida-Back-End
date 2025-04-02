@@ -26,7 +26,7 @@ export const getAllInternships = async (req, res) => {
     }
 }
 
-export const getAllInternshipById = async (req, res) => {
+export const getInternshipById = async (req, res) => {
     try {
         const internships = await Internship.findById(req.params.id).populate("providerId", "name");
         res.status(200).json(internships);
