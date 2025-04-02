@@ -10,10 +10,23 @@ const memberCodes = [
 
 export const registerUser = async (req, res)=> {
     try {
-        const {name, email, password, phone, role, disabilityCardCode, disabilityType, memberCode} = req.body;
+        const {name, email, password, phone, role, disabilityCardCode, disabilityTypes, memberCode} = req.body;
         let hashedPassword = await bcrypt.hash(password, 10);
         if(role === "member" && !memberCodes.includes(memberCode)) {
             return res.status(400).json({message: "Invalid member code!"});
+        }
+
+                // Enforce disability selection rules for interns
+        if (role === "intern") {
+            const validDisabilities = [
+                "Autism", "ADHD", "Blind", "Down Syndrome", "Dyslexia", "Mute", 
+                "Fetal Alcohol", "Dyscalculia", "Amputate", "Syndrome", "APD", 
+                "Narcolepsy", "Fragile X", "Deaf", "Other"
+            ];
+
+            if (!Array.isArray(disabilityTypes) || disabilityTypes.length === 0) {
+                return res.status(400).json({ message: "You must select at least one disability." });
+            }
         }
 
         const newUser = new User({name, email, password: hashedPassword, disabilityCardCode, disabilityType, memberCode, phone, role});
