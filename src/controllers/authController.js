@@ -10,7 +10,18 @@ const memberCodes = [
 
 export const registerUser = async (req, res)=> {
     try {
-        
+        const {name, email, password, phone, role, disabilityCardCode, disabilityType, memberCode} = req.body;
+        let hashedPassword = await bcrypt.hash(password, 10);
+        if(role === "member" && !memberCodes.includes(memberCode)) {
+            return res.status(400).json({message: "Invalid member code!"});
+        }
+
+        const newUser = new User({name, email, password: hashedPassword, disabilityCardCode, disabilityType, memberCode, phone, role});
+        await newUser.save();
+
+        res.status(201).json({message: "User registerd successfully"});
+
+
     } catch (error) {
         res.status(500).json({message: "Server error", error});
     }
