@@ -15,8 +15,9 @@ const internshipSchema = new mongoose.Schema({
         required: true
     },
     skillType: {
-        type: [String],
-        required: true
+        type: String,
+        required: true,
+        enum: ["Practical Skill", "Labor Intensive Skill", "Technical Skills", "Business Skill", "Care and Health"]
     },
     disabilityType: {
         type: [String],
