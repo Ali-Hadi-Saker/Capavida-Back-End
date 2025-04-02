@@ -32,6 +32,20 @@ export const getAllInternshipById = async (req, res) => {
         res.status(200).json(internships);
         
     } catch (error) {
-        res.status(500).json({ error: "Error fetching internship", details: error.message})
+        res.status(500).json({ error: "Error fetching internship", details: error.message});
+    }
+}
+
+export const deleteInternship = async ()=> {
+    try {
+        const internship = Internship.findById(req.params.id);
+        if(!internship) return res.status(404).json({error: "Internship not found"});
+        
+        await Internship.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({ message: "Internship deleted successfully"});
+        
+    } catch (error) {
+        res.status(500).json({ error: "Error deleting internship", details: error.message});
     }
 }
