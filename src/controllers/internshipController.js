@@ -25,3 +25,13 @@ export const getAllInternships = async (req, res) => {
         res.status(500).json({ error: "Error fetching internship", details: error.message})
     }
 }
+
+export const getAllInternshipById = async (req, res) => {
+    try {
+        const internships = await Internship.findById(req.params.id).populate("providerId", "name");
+        res.status(200).json(internships);
+        
+    } catch (error) {
+        res.status(500).json({ error: "Error fetching internship", details: error.message})
+    }
+}
