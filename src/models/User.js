@@ -6,6 +6,12 @@ const memberCodes = [
     "SBN - 09 - Fn", "JZD - 10 - HR", "SAD - 11 - HR", "KAN - 12 - D"
 ];
 
+const validDisabilities = [
+    "Autism", "ADHD", "Blind", "Down Syndrome", "Dyslexia", "Mute", 
+    "Fetal Alcohol", "Dyscalculia", "Amputate", "Syndrome", "APD", 
+    "Narcolepsy", "Fragile X", "Deaf", "Other"
+];
+
 const userSchema = new mongoose.Schema({
     role: {
         type: String,
@@ -34,7 +40,8 @@ const userSchema = new mongoose.Schema({
     },
     disabilityType: {
         type: String, 
-        required: function() { return this.role == "intern";}
+        required: function() { return this.role == "intern";},
+        enum: validDisabilities
     },
     memberCode: {
         type: String,
