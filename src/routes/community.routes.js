@@ -7,6 +7,6 @@ router.post("/create", createCommunity);
 router.get("/", getAllCommunities);
 router.get("/:id", getCommunityById);
 router.get("/join", joinCommunity);
-router.get("/leave", leaveCommunity);
+router.get("/leave/:id", leaveCommunity);
 
 export default router;
