@@ -72,3 +72,20 @@ export const joinCommunity = async (req, res)=> {
         res.status(500).json({message: "Server error", error: error.message});
     }
 }
+
+export const leaveComunity = async (req, res)=> {
+    try {
+        const community = req.params.id;
+        if (!community.members.includes(req.user.id)) {
+            return res.status(400).json({message: "You are not member of this community"});
+        }
+
+        community.members = community.members.filter(member => member.toString() !== req.user.id);
+        await community.save();
+        res.status(200).json({message: "Left community successfully", community});
+
+    } catch (error) {
+        res.status(500).json({message: "Server error", error: error.message});
+    
+    }
+}
