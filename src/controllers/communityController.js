@@ -28,3 +28,12 @@ export const createCommunity = async (req, res)=> {
         
     }
 }
+
+export const getAllCommunities = async (req, res)=> {
+    try {
+        const communities = await Community.find.populate("creatorId", "name");
+        res.status(200).json(communities);
+    } catch (error) {
+        res.status(500).json({ error: "Error frtching community", details: error.message});        
+    }
+}
