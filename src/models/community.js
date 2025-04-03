@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const communitySchema = new mongoose.Schema({
-    nqme: {
+    name: {
         type: String,
         required: true,
         unique: true
