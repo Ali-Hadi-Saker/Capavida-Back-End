@@ -12,7 +12,7 @@ const communitySchema = new mongoose.Schema({
     },
     slogan: {type: String},
     policies: {type: String},
-    picture: {typr: String},//url for community picture
+    picture: {type: String},//url for community picture
     creatorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

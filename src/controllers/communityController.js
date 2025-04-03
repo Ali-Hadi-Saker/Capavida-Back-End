@@ -31,10 +31,10 @@ export const createCommunity = async (req, res)=> {
 
 export const getAllCommunities = async (req, res)=> {
     try {
-        const communities = await Community.find.populate("creatorId", "name");
+        const communities = await Community.find().populate("creatorId", "name");
         res.status(200).json(communities);
     } catch (error) {
-        res.status(500).json({ error: "Error frtching community", details: error.message});        
+        res.status(500).json({ error: "Error fetching communities", details: error.message});        
     }
 }
 
@@ -75,7 +75,11 @@ export const joinCommunity = async (req, res)=> {
 
 export const leaveCommunity = async (req, res)=> {
     try {
-        const community = req.params.id;
+        const community = await Community.findById(req.params.id);
+        if (!community) {
+            return res.status(404).json({message: "Community not found"});
+        }
+        
         if (!community.members.includes(req.user.id)) {
             return res.status(400).json({message: "You are not member of this community"});
         }
