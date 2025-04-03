@@ -51,3 +51,24 @@ export const getCommunityById = async (req, res)=> {
         res.status(500).json({message: "Server error", error: error.message});
     }
 }
+
+export const joinCommunity = async (req, res)=> {
+    try {
+        const community = await Community.findById(req.params.id).populate("creatorId", "name");
+        if (!community) {
+            return res.status(404).json({message: "Community not found"});
+        }
+
+        if(community.members.includes(req.user.id)) {
+            return res.status(400).json({message: "You are already member"});
+        }
+
+        community.members.push(req.user.id);
+        await community.save();
+
+        res.status(200).json({message: "joined community successfully", community});
+
+    } catch (error) {
+        res.status(500).json({message: "Server error", error: error.message});
+    }
+}
