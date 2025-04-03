@@ -37,3 +37,17 @@ export const getAllCommunities = async (req, res)=> {
         res.status(500).json({ error: "Error frtching community", details: error.message});        
     }
 }
+
+export const getCommunityById = async (req, res)=> {
+    try {
+        const community = await Community.findById(req.params.id).populate("creatorId", "name");
+        if (!community) {
+            return res.status(404).json({message: "Community not found"});
+        }
+
+        res.status(200).json(community);
+
+    } catch (error) {
+        res.status(500).json({message: "Server error", error: error.message});
+    }
+}
