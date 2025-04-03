@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import internshipRoutes from "./routes/internship.routes.js"
 import communityRoutes from "./routes/community.routes.js"
+import marketplaceRoutes from "./routes/marketplace.routes.js"
 
 dotenv.config(); // Initializes dotenv so we can access variables using process.env
 
@@ -22,5 +23,6 @@ connectDB();
 app.use("/api/auth", authRoutes);
 app.use("/api/internship", internshipRoutes)
 app.use("/api/communities", communityRoutes)
+app.use("/api/marketplace", marketplaceRoutes)
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
