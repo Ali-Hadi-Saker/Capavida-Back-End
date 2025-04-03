@@ -73,7 +73,7 @@ export const joinCommunity = async (req, res)=> {
     }
 }
 
-export const leaveComunity = async (req, res)=> {
+export const leaveCommunity = async (req, res)=> {
     try {
         const community = req.params.id;
         if (!community.members.includes(req.user.id)) {
