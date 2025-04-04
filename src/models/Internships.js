@@ -47,7 +47,11 @@ const internshipSchema = new mongoose.Schema({
     ],
     pdfCourses: {
         type: [String]//arrays of URLs to pdf courses
-    }
+    },
+    enrolledUsers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }]
 })
 
 export default mongoose.model("Internship", internshipSchema);

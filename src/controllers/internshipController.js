@@ -49,3 +49,31 @@ export const deleteInternship = async (req, res)=> {
         res.status(500).json({ error: "Error deleting internship", details: error.message});
     }
 }
+
+export const enrollInternship = async (req, res) => {
+    try {
+        const internshipId = req.params.id;
+        const userId = req.user.id; // From auth middleware
+
+        const internship = await Internship.findById(internshipId);
+        if (!internship) {
+            return res.status(404).json({ error: "Internship not found" });
+        }
+
+        // Check if user is already enrolled
+        if (internship.enrolledUsers.includes(userId)) {
+            return res.status(400).json({ error: "User already enrolled in this internship" });
+        }
+
+        // Add user to enrolled users
+        internship.enrolledUsers.push(userId);
+        await internship.save();
+
+        res.status(200).json({ 
+            message: "Successfully enrolled in internship",
+            internship: internship
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Error enrolling in internship", details: error.message });
+    }
+};
