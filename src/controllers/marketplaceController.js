@@ -1,4 +1,4 @@
-import Marketplace from "../models/marketplaceModel.js"; 
+import Marketplace from "../models/marketplace.js"; 
 
 // Create a new marketplace item
 export const createMarketplace = async (req, res) => {
