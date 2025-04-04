@@ -77,3 +77,20 @@ export const enrollInternship = async (req, res) => {
         res.status(500).json({ error: "Error enrolling in internship", details: error.message });
     }
 };
+
+export const getUserEnrolledInternships = async (req, res) => {
+    try {
+        const userId = req.user.id; // From auth middleware
+
+        const enrolledInternships = await Internship.find({
+            enrolledUsers: userId
+        }).populate("providerId", "name");
+
+        res.status(200).json({
+            message: "Successfully fetched enrolled internships",
+            internships: enrolledInternships
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Error fetching enrolled internships", details: error.message });
+    }
+};
