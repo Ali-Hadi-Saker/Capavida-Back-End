@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
 
+const validDisabilities = [
+    "Autism", "ADHD", "Blind", "Down Syndrome", "Dyslexia", "Mute", 
+    "Fetal Alcohol", "Dyscalculia", "Amputate", "Syndrome", "APD", 
+    "Narcolepsy", "Fragile X", "Deaf", "Other"
+];
+
 const internshipSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -21,7 +27,8 @@ const internshipSchema = new mongoose.Schema({
     },
     disabilityType: {
         type: [String],
-        required: true
+        required: true,
+        enum: validDisabilities
     },
     duration: {
         type: String,
