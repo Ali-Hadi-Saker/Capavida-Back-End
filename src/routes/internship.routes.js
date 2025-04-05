@@ -1,5 +1,5 @@
 import express from 'express';
-import { createInternship, deleteInternship, getAllInternships, getInternshipById, enrollInternship, getUserEnrolledInternships } from '../controllers/internshipController.js';
+import { createInternship, deleteInternship, getAllInternships, getInternshipById, enrollInternship, getUserEnrolledInternships, withdrawInternship } from '../controllers/internshipController.js';
 import { isAuth } from '../middleware/authMiddleware.js';
 
 
@@ -10,6 +10,7 @@ router.get("/", getAllInternships);
 router.get("/:id", getInternshipById);
 router.delete("/:id", deleteInternship);
 router.post("/:id/enroll", isAuth, enrollInternship);
+router.post("/:id/withdraw", isAuth, withdrawInternship);
 router.get("/enrolled/me", isAuth, getUserEnrolledInternships);
 
 export default router;

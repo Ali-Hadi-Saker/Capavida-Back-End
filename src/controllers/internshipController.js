@@ -78,6 +78,33 @@ export const enrollInternship = async (req, res) => {
     }
 };
 
+export const withdrawInternship = async (req, res)=> {
+    try {
+        const internshipId = req.params.id;
+        const userId = req.user.id;
+
+        const internship = await Internship.findById(internshipId);
+        if (!internship) {
+            return res.status(404).json({ error: "Internship not found" });
+        }
+
+        if (!internship.enrolledUsers.includes(userId)) {
+            return res.status(400).json({ error: "User is not enrolled in this internship" });
+        }
+
+        internship.enrolledUsers = internship.enrolledUsers.filter(user => user.toString() !== userId);
+        await internship.save();
+
+        res.status(200).json({ 
+            message: "Successfully withdraw from internship",
+            internship: internship
+        });
+        
+    } catch (error) {
+        res.status(500).json({ error: "Error withdraw from internship", details: error.message });
+    }
+}
+
 export const getUserEnrolledInternships = async (req, res) => {
     try {
         const userId = req.user.id; // From auth middleware
