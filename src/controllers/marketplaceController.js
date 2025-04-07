@@ -3,19 +3,19 @@ import Marketplace from "../models/marketplace.js";
 // Create a new marketplace item
 export const createMarketplace = async (req, res) => {
     try {
-        const { name, description, price, category, image } = req.body;
+        const { name, ownerName, location, category, disabilityType, description } = req.body;
 
-        if (!name || !description || !price || !category) {
-            return res.status(400).json({ message: "All fields (name, description, price, category) are required" });
+        if (!name || !description || !ownerName || !category || !location || !disabilityType) {
+            return res.status(400).json({ message: "All fields are required" });
         }
 
         const newMarketplace = new Marketplace({
             name,
             description,
-            price,
+            ownerName,
             category,
-            image,
-            sellerId: req.user.id, // Assuming user authentication
+            disabilityType,
+            location
         });
 
         await newMarketplace.save();
