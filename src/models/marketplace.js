@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
 
+const validDisabilities = [
+    "Autism", "ADHD", "Blind", "Down Syndrome", "Dyslexia", "Mute", 
+    "Fetal Alcohol", "Dyscalculia", "Amputate", "Syndrome", "APD", 
+    "Narcolepsy", "Fragile X", "Deaf", "Other"
+];
+
 const marketplaceSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -18,14 +24,13 @@ const marketplaceSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ["Retail", "Technology", "Health", "Education", "Finance", "Manufacturing", "Others"]
+        enum: ["Food Services and Products", "Textile Products and Services", "Artisan Products and Services"]
     },
-    disabledMatch: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User" // Referencing Users who match this marketplace
-        }
-    ],
+    disabilityType: {
+        type: [String],
+        required: true,
+        enum: validDisabilities
+    },
     description: {
         type: String,
         required: true
