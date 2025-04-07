@@ -19,7 +19,10 @@ export const createMarketplace = async (req, res) => {
         });
 
         await newMarketplace.save();
-        res.status(201).json({ message: "Market item created successfully", item: newItem });
+        res.status(201).json({ 
+            message: "Marketplace item created successfully", 
+            item: newMarketplace 
+        });
 
     } catch (error) {
         res.status(500).json({ error: "Error creating market item", details: error.message });
