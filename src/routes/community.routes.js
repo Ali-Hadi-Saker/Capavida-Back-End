@@ -4,7 +4,7 @@ import { isAuth } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post("/create", isAuth, createCommunity);
+router.post("/", isAuth, createCommunity);
 router.get("/", getAllCommunities);
 router.get("/:id", getCommunityById);
 router.post("/:id/join", isAuth, joinCommunity);
