@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 5000; // Starts the Express server on the defin
 // Connect to MongoDB
 connectDB();
 
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/internship", internshipRoutes)
